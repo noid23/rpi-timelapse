@@ -1,4 +1,4 @@
-#RPi-Timelapse
+# RPi-Timelapse
 
 Set of scripts to get your location and what time sunset is where you are to then set a cron job that runs 30 minutes before sunset.
 
