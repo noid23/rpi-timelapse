@@ -21,5 +21,9 @@ Usage:
 user@host:~$ ./sunset-timelapse.sh [interval] [duration]
 ```
 
+## RPi Zero 2 W Configuration Changes
+
+**coming soon**
+
 This is a work in progress as of 11/4/25. Use at your own risk.
 
