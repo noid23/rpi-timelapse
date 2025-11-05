@@ -4,22 +4,15 @@ Set of scripts to get your location and what time sunset is where you are to the
 
 A photo will be taken at whatever interval you choose, then the photos will be turned into a timelapse video
 
-## sunset-cron.sh
+## setsunset.sh / sunset-cron.sh
 
-Requires `curl` and `jq` Sets your location based off your IP address, pulls the sunset time for your area, and adds a cron job for <user_defined> minutes prior
-
-Usage:
-```
-user@host:~$ ./sunset-cron.sh [minutes before sunset]
-```
-
-## setsunset.sh 
-
-Requires `curl` and `jq`. This script requires the user to specify their own LAT and LON in the config. Useful if your IP geo location data is frequently wrong. For example, VPN users
+Both require `curl` and `jq`. `sunset-cron.sh` sets your location based off your IP address, pulls the sunset time for your area, and adds a cron job for <user_defined> minutes prior
+`setsunset.sh` requires the user to specify their own LAT and LON in the config. Useful if your IP geo location data is frequently wrong. For example, VPN users
 
 Usage:
 ```
 user@host:~$ ./setsunset.sh [minutes before sunset]
+user@host:~$ ./sunset-cron.sh [minutes before sunset]
 ```
 
 ## sunset-timelapse.sh
