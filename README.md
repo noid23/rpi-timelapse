@@ -35,5 +35,29 @@ user@host:~$ ./sunset-timelapse.sh [interval] [duration]
 
 **coming soon**
 
+## How to Use
+
+This is a two part script. First, pick either `setsunset.sh` or `sunset-cron.sh` to set the launch time for the timelapse script. 
+Put the script wherever you want it to live and then, using your editor of choice, edit your crontab with `crontab -e`. Insert the script into your crontab with whatever time you want it to execute every day. I have mine run at 0200. Save your crontab. You can verify that it's there with a `crontab -l`.
+
+Example:
+```
+# m h  dom mon dow   command
+0 2 * * * /home/noid/setsunset.sh 30
+```
+
+Next, edit whatever script you went with to point it to the `sunset-timelapse.sh` location. Don't forget to add the required parameters the script needs to work.
+You have to provide an interval (in seconds) for how often photos will be taken and a duration (in minutes) for how long you want the script to run for. This is useful for tuning your timelapse event (in my case, it's recording the sunset)
+
+Example for setsunset.sh:
+```
+# === CONFIGURATION ===
+CRON_COMMAND="/home/noid/sunset-timelapse.sh 60 40"  # Command or script to run X min before sunset
+```
+
+In this case the cron job will kick off 30 minutes before sunset. The script will then take a picture every 60 seconds for the next 40 minutes.
+
+Once the script finishes up you will find your timelapse movie in `$HOME/sunset-timelapse`
+
 This is a work in progress as of 11/4/25. Use at your own risk.
 
