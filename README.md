@@ -14,4 +14,12 @@ Requires you to set your own LAT and LON in the script. Useful if your IP geo lo
 
 ## sunset-timelapse.sh
 
-**coming soon**
+Requires ffmpeg and libcamera-apps. Script will make a timelapse video based off photos taken by the camera device. You can specifiy a time interval for when photos will be taken (in seconds) and a duration for how long to run (in minutes). Once the pictures are taken, ffmpeg will stitch them into a video for your enjoyment
+
+Usage:
+```
+user@host:~$ ./sunset-timelapse.sh [interval] [duration]
+```
+
+This is a work in progress as of 11/4/25. Use at your own risk.
+
