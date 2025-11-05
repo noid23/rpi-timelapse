@@ -1,10 +1,10 @@
 #!/bin/bash
 # sunset-cron.sh
-# Fetches today's sunset time for your current IP location and sets a cron job 30 minutes before.
+# Fetches today's sunset time for your current IP location and sets a cron job X minutes before.
 
 # === CONFIGURATION ===
-CRON_COMMAND="/home/noid/script1.sh"  # Command or script to run 30 min before sunset
-
+CRON_COMMAND="/home/noid/script1.sh"  # Command or script to run X min before sunset
+START_TIME="$1"         #User defined start time
 # === DEPENDENCIES CHECK ===
 for cmd in curl jq date; do
   if ! command -v $cmd &>/dev/null; then
@@ -12,6 +12,13 @@ for cmd in curl jq date; do
     exit 1
   fi
 done
+
+# === Input Check ===
+if [ -z "$START_TIME" ]; then
+  echo "Usage: $0 <minutes_before_sunset>"
+  exit 1
+fi
+
 
 # === DETECT LOCATION ===
 LOCATION_JSON=$(curl -s https://ipinfo.io)
@@ -37,15 +44,15 @@ fi
 # === CONVERT TO LOCAL TIME ===
 SUNSET_LOCAL=$(date -d "$SUNSET_UTC" +"%Y-%m-%d %H:%M:%S")
 
-# === CALCULATE 30 MINUTES BEFORE SUNSET ===
-SUNSET_MINUS_30=$(date -d "30 minutes ago $SUNSET_LOCAL" +"%M %H %d %m *")
+# === CALCULATE X MINUTES BEFORE SUNSET ===
+SUNSET_MINUS_X=$(date -d "$START_TIME minutes ago $SUNSET_LOCAL" +"%M %H %d %m *")
 
 # === UPDATE CRON JOB ===
 crontab -l 2>/dev/null | grep -v "$CRON_COMMAND" > /tmp/cron.tmp
-echo "$SUNSET_MINUS_30 $CRON_COMMAND" >> /tmp/cron.tmp
+echo "$SUNSET_MINUS_X $CRON_COMMAND" >> /tmp/cron.tmp
 crontab /tmp/cron.tmp
 rm /tmp/cron.tmp
 
-echo "✅ Cron job set for 30 minutes before sunset."
+echo "✅ Cron job set for $START_TIME minutes before sunset."
 echo "   🌆 Sunset: $SUNSET_LOCAL"
-echo "   🕐 Job runs at: $(date -d "30 minutes ago $SUNSET_LOCAL" +"%Y-%m-%d %H:%M:%S")"
+echo "   🕐 Job runs at: $(date -d "$START_TIME minutes ago $SUNSET_LOCAL" +"%Y-%m-%d %H:%M:%S")"
