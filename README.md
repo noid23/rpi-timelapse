@@ -6,8 +6,7 @@ A photo will be taken at whatever interval you choose, then the photos will be t
 
 ## setsunset.sh / sunset-cron.sh
 
-Both require `curl` and `jq`. `sunset-cron.sh` sets your location based off your IP address, pulls the sunset time for your area, and adds a cron job for <user_defined> minutes prior
-`setsunset.sh` requires the user to specify their own LAT and LON in the config. Useful if your IP geo location data is frequently wrong. For example, VPN users
+Both require `curl` and `jq`. `sunset-cron.sh` sets your location based off your IP address, pulls the sunset time for your area, and adds a cron job for <user_defined> minutes prior. `setsunset.sh` requires the user to specify their own LAT and LON in the config. Useful if your IP geo location data is frequently wrong. For example, VPN users
 
 Usage:
 ```
