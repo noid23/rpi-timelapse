@@ -23,9 +23,16 @@ Usage:
 user@host:~$ ./sunset-timelapse.sh [interval] [duration]
 ```
 
-## RPi Zero 2 W Configuration Changes
+## RPi Equipment and Setup
 
-**coming soon**
+This was built with the following:
+The Pi: [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
+The Camera: [Raspberry Pi Camera Module 3](https://www.raspberrypi.com/products/camera-module-3/)
+The Case: [PiShop's Pi Zero Case](https://www.pishop.us/product/camera-case-for-raspberry-pi-zero-updated-for-v3/)
+
+I am going to assume this isn't your first rodeo with the Raspberry Pi. Grab the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for your OS of choice. I went with the basic RPi OS (64 bit). Install it, configure it, live it, laugh it, and love it. 
+
+Install your prerequisite packages like `jq`, `ffmpeg`, and `libcamera-apps`. Now verify that the camera is detected and working by issuing a `vcgencmd get_camera` command. This __should__ return a value of `supported=1 detected=1`. If you get a response of `supported=0 detected=0`, something is wrong. Check the cable between the board and the camera. Other than that, leverage the Internet to troubleshoot. You can test the camera by issuing a `libcamera-hello -t 0` to open up a feed from the camera. Alternately you can issue a `rpicam-still -o test.jpg` to snap a photo. Now that you have your camera working, you can proceed to the next step.
 
 ## How to Use
 
