@@ -26,9 +26,9 @@ user@host:~$ ./sunset-timelapse.sh [interval] [duration]
 ## RPi Equipment and Setup
 
 This was built with the following:
-The Pi: [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
-The Camera: [Raspberry Pi Camera Module 3](https://www.raspberrypi.com/products/camera-module-3/)
-The Case: [PiShop's Pi Zero Case](https://www.pishop.us/product/camera-case-for-raspberry-pi-zero-updated-for-v3/)
+* The Pi: [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
+* The Camera: [Raspberry Pi Camera Module 3](https://www.raspberrypi.com/products/camera-module-3/)
+* The Case: [PiShop's Pi Zero Case](https://www.pishop.us/product/camera-case-for-raspberry-pi-zero-updated-for-v3/)
 
 I am going to assume this isn't your first rodeo with the Raspberry Pi. Grab the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for your OS of choice. I went with the basic RPi OS (64 bit). Install it, configure it, live it, laugh it, and love it. 
 
