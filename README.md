@@ -30,9 +30,22 @@ This was built with the following:
 * The Camera: [Raspberry Pi Camera Module 3](https://www.raspberrypi.com/products/camera-module-3/)
 * The Case: [PiShop's Pi Zero Case](https://www.pishop.us/product/camera-case-for-raspberry-pi-zero-updated-for-v3/)
 
-I am going to assume this isn't your first rodeo with the Raspberry Pi. Grab the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for your OS of choice. I went with the basic RPi OS (64 bit). Install it, configure it, live it, laugh it, and love it. 
+I am going to assume this isn't your first rodeo with the Raspberry Pi. Grab the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for your OS of choice. I went with the basic RPi OS **LITE** (64 bit). Install it, configure it, live it, laugh it, and love it. 
 
-Install your prerequisite packages like `jq`, `ffmpeg`, and `libcamera-apps`. Now verify that the camera is detected and working by issuing a `vcgencmd get_camera` command. This __should__ return a value of `supported=1 detected=1`. If you get a response of `supported=0 detected=0`, something is wrong. Check the cable between the board and the camera. Other than that, leverage the Internet to troubleshoot. You can test the camera by issuing a `libcamera-hello -t 0` to open up a feed from the camera. Alternately you can issue a `rpicam-still -o test.jpg` to snap a photo. Now that you have your camera working, you can proceed to the next step.
+**NOTE on Camera Cable:** When you attach the cable from the Pi to the camera take care to ensure you install it in the correct direction. Make sure that the contacts on the cable face the contacts on the hardware. You can install it "upside down" and, obviously, it won't work. Ask me how I know 😜
+
+The RPi folks will tell you that the camera "just works" out of the box. As of this writting, using lite version of Debian Trixie, the camera does not work unless you make some changes. Once you get your OS up and running go ahead and install your prerequisite packages like `jq`, `ffmpeg`, and `libcamera-apps`. then you need to edit your config
+```
+user@host:~$ sudo nano /boot/firmware/config.txt
+
+Change camera_auto_detect=1 to camera_auto_detect=0
+
+[All]
+dtoverlay=imx708
+```
+Now reboot
+
+After a reboot you can test the camera by issuing a `rpicam-still -o test.jpg` to snap a photo. The IMX708 driver is necessary for the camera to work and not loaded unless you tell the system to do so. Now you should be ready to move on to the next step
 
 ## How to Use
 
