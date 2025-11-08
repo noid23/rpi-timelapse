@@ -18,7 +18,7 @@ IMAGE_WIDTH=1920
 IMAGE_HEIGHT=1080
 
 # --- DEPENDENCY CHECK ---
-for cmd in ffmpeg libcamera-still date mkdir; do
+for cmd in ffmpeg rpicam-still date mkdir; do
   if ! command -v $cmd &>/dev/null; then
     echo "❌ Missing dependency: $cmd"
     echo "Install with: sudo apt install ffmpeg libcamera-apps -y"
@@ -56,13 +56,13 @@ for ((i=1; i<=TOTAL_SHOTS; i++)); do
     FILENAME="$WORK_DIR/$TS.jpg"
 
     # --- CAPTURE IMAGE ---
-    # Try libcamera-still first; fallback to fswebcam if unavailable
-    if command -v libcamera-still &>/dev/null; then
-        libcamera-still -o "$FILENAME" --width $IMAGE_WIDTH --height $IMAGE_HEIGHT -n
+    # Try rpicam-still first; fallback to fswebcam if unavailable
+    if command -v rpicam-still &>/dev/null; then
+        rpicam-still -o "$FILENAME" --width $IMAGE_WIDTH --height $IMAGE_HEIGHT -n
     elif command -v fswebcam &>/dev/null; then
         fswebcam -d "$CAMERA_DEVICE" -r ${IMAGE_WIDTH}x${IMAGE_HEIGHT} --no-banner "$FILENAME"
     else
-        echo "❌ No supported camera command found (libcamera-still or fswebcam)."
+        echo "❌ No supported camera command found (rpicam-still or fswebcam)."
         exit 1
     fi
 
