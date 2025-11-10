@@ -50,6 +50,9 @@ echo "   Working directory: $WORK_DIR"
 TOTAL_SHOTS=$(( (DURATION * 60) / INTERVAL ))
 echo "   Total images to capture: $TOTAL_SHOTS"
 
+# --- LOG START OF LOOP ---
+logger "sunset-timelapse.sh photo collection started"
+
 # --- CAPTURE LOOP ---
 for ((i=1; i<=TOTAL_SHOTS; i++)); do
     TS=$(date +"%Y-%m-%d_%H-%M-%S")
@@ -70,8 +73,12 @@ for ((i=1; i<=TOTAL_SHOTS; i++)); do
     sleep "$INTERVAL"
 done
 
+# --- LOG END OF LOOP ---
+logger "sunset-timelapse.sh photo collection ended"
+
 # --- CREATE TIMELAPSE VIDEO ---
 echo "🎞️ Creating video from captured images..."
+logger "sunset-timelapse.sh creating video from captured images"
 OUTPUT_VIDEO="$OUTPUT_DIR_BASE/sunset-$DATE_STR.mp4"
 
 # Generate video from images in chronological order
@@ -80,8 +87,10 @@ ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" \
 
 if [ $? -eq 0 ]; then
   echo "✅ Timelapse created: $OUTPUT_VIDEO"
+  logger "sunset-timelapse.sh timelapse created: $OUTPUT_VIDEO"
 else
   echo "❌ Failed to generate video."
+  logger "sunset-timelapse.sh failed to generate video"
   exit 1
 fi
 

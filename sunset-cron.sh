@@ -53,6 +53,9 @@ echo "$SUNSET_MINUS_X $CRON_COMMAND" >> /tmp/cron.tmp
 crontab /tmp/cron.tmp
 rm /tmp/cron.tmp
 
+# Log a message for troubleshooting purposes
+logger "sunset-cron.sh cronjob set for $(date -d "$START_TIME minutes ago $SUNSET_LOCAL" +"%Y-%m-%d %H:%M:%S")"
+
 echo "✅ Cron job set for $START_TIME minutes before sunset."
 echo "   🌆 Sunset: $SUNSET_LOCAL"
 echo "   🕐 Job runs at: $(date -d "$START_TIME minutes ago $SUNSET_LOCAL" +"%Y-%m-%d %H:%M:%S")"
