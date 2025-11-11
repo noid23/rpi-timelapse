@@ -72,7 +72,6 @@ Once the script finishes up you will find your timelapse movie in `$HOME/sunset-
 
 ## To-Do
 * Add command line flag to clean up images after video generation
-* Clean up crontab after repeated runs
 
 This is a work in progress as of 11/10/25. Use at your own risk.
 
