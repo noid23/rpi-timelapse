@@ -70,5 +70,9 @@ In this case the cron job will kick off 30 minutes before sunset. The script wil
 
 Once the script finishes up you will find your timelapse movie in `$HOME/sunset-timelapse`
 
-This is a work in progress as of 11/4/25. Use at your own risk.
+## To-Do
+* Add command line flag to clean up images after video generation
+* Clean up crontab after repeated runs
+
+This is a work in progress as of 11/10/25. Use at your own risk.
 
