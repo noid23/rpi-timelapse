@@ -70,7 +70,7 @@ Once the script finishes up you will find your timelapse movie in `$HOME/sunset-
 
 ## To-Do
 * Add command line flag to clean up images after video generation
-~~ * Add logging capabilities ~~
+* ~~Add logging capabilities~~
 
 ## Notes
 **NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
