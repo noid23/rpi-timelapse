@@ -32,8 +32,6 @@ This was built with the following:
 
 I am going to assume this isn't your first rodeo with the Raspberry Pi. Grab the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for your OS of choice. I went with the basic RPi OS **LITE** (64 bit). Install it, configure it, live it, laugh it, and love it. 
 
-**NOTE on Camera Cable:** When you attach the cable from the Pi to the camera take care to ensure you install it in the correct direction. Make sure that the contacts on the cable face the contacts on the hardware. You can install it "upside down" and, obviously, it won't work. Ask me how I know 😜
-
 The RPi folks will tell you that the camera "just works" out of the box. As of this writting, using lite version of Debian Trixie, the camera does not work unless you make some changes. Once you get your OS up and running go ahead and install your prerequisite packages like `jq`, `ffmpeg`, and `libcamera-apps`. then you need to edit your config
 ```
 user@host:~$ sudo nano /boot/firmware/config.txt
@@ -46,16 +44,6 @@ dtoverlay=imx708
 Now reboot
 
 After a reboot you can test the camera by issuing a `rpicam-still -o test.jpg` to snap a photo. The IMX708 driver is necessary for the camera to work and not loaded unless you tell the system to do so. Now you should be ready to move on to the next step
-
-**NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
-```
-ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -r 30 -pix_fmt yuv420p "$OUTPUT_VIDEO"
-```
-To get around this limitation I went with the following, which does work, but comes with some caveats. Going lossless will work on the Pi Zero 2 W, but will generate very large videos. To put it in context a 40 minute run taking pictures twice a minute resulted in a 70mb video file. 
-```
-ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -crf 0 "$OUTPUT_VIDEO"
-```
-If you are using this script on a Pi 4 or 5, the original ffmpeg string will probably work just fine. I left it commented out in my script for you. Alternately if you are a ffmpeg guru and know of a better way to do this, open an issue. I'd love to know
 
 ## How to Use
 
@@ -82,6 +70,18 @@ Once the script finishes up you will find your timelapse movie in `$HOME/sunset-
 
 ## To-Do
 * Add command line flag to clean up images after video generation
-
+~~* Add logging capabilities ~~
 This is a work in progress as of 11/10/25. Use at your own risk.
 
+## Notes
+**NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
+```
+ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -r 30 -pix_fmt yuv420p "$OUTPUT_VIDEO"
+```
+To get around this limitation I went with the following, which does work, but comes with some caveats. Going lossless will work on the Pi Zero 2 W, but will generate very large videos. To put it in context a 40 minute run taking pictures twice a minute resulted in a 70mb video file. 
+```
+ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -crf 0 "$OUTPUT_VIDEO"
+```
+If you are using this script on a Pi 4 or 5, the original ffmpeg string will probably work just fine. I left it commented out in my script for you. Alternately if you are a ffmpeg guru and know of a better way to do this, open an issue. I'd love to know
+
+**NOTE on Camera Cable:** When you attach the cable from the Pi to the camera take care to ensure you install it in the correct direction. Make sure that the contacts on the cable face the contacts on the hardware. You can install it "upside down" and, obviously, it won't work. Ask me how I know 😜
