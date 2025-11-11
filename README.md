@@ -47,6 +47,16 @@ Now reboot
 
 After a reboot you can test the camera by issuing a `rpicam-still -o test.jpg` to snap a photo. The IMX708 driver is necessary for the camera to work and not loaded unless you tell the system to do so. Now you should be ready to move on to the next step
 
+**NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
+```
+ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -r 30 -pix_fmt yuv420p "$OUTPUT_VIDEO"
+```
+To get around this limitation I went with the following, which does work, but comes with some caveats. Going lossless will work on the Pi Zero 2 W, but will generate very large videos. To put it in context a 40 minute run taking pictures twice a minute resulted in a 70mb video file. 
+```
+ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -crf 0 "$OUTPUT_VIDEO"
+```
+If you are using this script on a Pi 4 or 5, the original ffmpeg string will probably work just fine. I left it commented out in my script for you. Alternately if you are a ffmpeg guru and know of a better way to do this, open an issue. I'd love to know
+
 ## How to Use
 
 This is a two part script. 
