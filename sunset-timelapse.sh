@@ -14,8 +14,8 @@
 # --- CONFIGURATION ---
 OUTPUT_DIR_BASE="$HOME/sunset-timelapse"   # Where finished videos will go
 CAMERA_DEVICE="/dev/video0"                # Change if needed
-IMAGE_WIDTH=1920
-IMAGE_HEIGHT=1080
+IMAGE_WIDTH=2304                           # RPi Camera Module Image Resolution 4608x2592
+IMAGE_HEIGHT=1296                          # Max HDR resoution 2304x1296
 
 # --- DEPENDENCY CHECK ---
 for cmd in ffmpeg rpicam-still date mkdir; do
@@ -81,9 +81,12 @@ echo "🎞️ Creating video from captured images..."
 logger "sunset-timelapse.sh creating video from captured images"
 OUTPUT_VIDEO="$OUTPUT_DIR_BASE/sunset-$DATE_STR.mp4"
 
-# Generate video from images in chronological order
+# Generate video from images in chronological order 
+# Commented out command causing memory exhaustion on RPi Zero 2 W
+# ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" \
+#   -c:v libx264 -r 30 -pix_fmt yuv420p "$OUTPUT_VIDEO"
 ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" \
-  -c:v libx264 -r 30 -pix_fmt yuv420p "$OUTPUT_VIDEO"
+  -c:v libx264 -crf 0 "$OUTPUT_VIDEO" -loglevel info
 
 if [ $? -eq 0 ]; then
   echo "✅ Timelapse created: $OUTPUT_VIDEO"
