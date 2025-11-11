@@ -69,8 +69,8 @@ In this case the cron job will kick off 30 minutes before sunset. The script wil
 Once the script finishes up you will find your timelapse movie in `$HOME/sunset-timelapse`
 
 ## To-Do
-* Add command line flag to clean up images after video generation \
-~~* Add logging capabilities ~~ \
+* Add command line flag to clean up images after video generation
+~~ * Add logging capabilities ~~
 
 ## Notes
 **NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
