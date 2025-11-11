@@ -69,9 +69,8 @@ In this case the cron job will kick off 30 minutes before sunset. The script wil
 Once the script finishes up you will find your timelapse movie in `$HOME/sunset-timelapse`
 
 ## To-Do
-* Add command line flag to clean up images after video generation
-~~* Add logging capabilities ~~
-This is a work in progress as of 11/10/25. Use at your own risk.
+* Add command line flag to clean up images after video generation \
+~~* Add logging capabilities ~~ \
 
 ## Notes
 **NOTE :** I encountered a limitation with encoding videos on the RPi Zero 2 W. The following command does not work if you don't have enough memory
@@ -85,3 +84,5 @@ ffmpeg -y -pattern_type glob -i "$WORK_DIR/*.jpg" -c:v libx264 -crf 0 "$OUTPUT_V
 If you are using this script on a Pi 4 or 5, the original ffmpeg string will probably work just fine. I left it commented out in my script for you. Alternately if you are a ffmpeg guru and know of a better way to do this, open an issue. I'd love to know
 
 **NOTE on Camera Cable:** When you attach the cable from the Pi to the camera take care to ensure you install it in the correct direction. Make sure that the contacts on the cable face the contacts on the hardware. You can install it "upside down" and, obviously, it won't work. Ask me how I know 😜
+
+This is a work in progress as of 11/10/25. Use at your own risk.
