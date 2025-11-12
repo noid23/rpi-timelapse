@@ -14,8 +14,8 @@
 # --- CONFIGURATION ---
 OUTPUT_DIR_BASE="$HOME/sunset-timelapse"   # Where finished videos will go
 CAMERA_DEVICE="/dev/video0"                # Change if needed
-IMAGE_WIDTH=2304                           # RPi Camera Module Image Resolution 4608x2592
-IMAGE_HEIGHT=1296                          # Max HDR resoution 2304x1296
+IMAGE_WIDTH=1536                           # RPi Camera Module Image Resolution 4608x2592
+IMAGE_HEIGHT=864                           # Max HDR resoution 2304x1296
 
 # --- DEPENDENCY CHECK ---
 for cmd in ffmpeg rpicam-still date mkdir; do
