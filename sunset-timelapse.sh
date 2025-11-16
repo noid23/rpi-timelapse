@@ -61,7 +61,7 @@ for ((i=1; i<=TOTAL_SHOTS; i++)); do
     # --- CAPTURE IMAGE ---
     # Try rpicam-still first; fallback to fswebcam if unavailable
     if command -v rpicam-still &>/dev/null; then
-        rpicam-still -o "$FILENAME" --width $IMAGE_WIDTH --height $IMAGE_HEIGHT -n
+        rpicam-still -hdr=auto -o "$FILENAME" --width $IMAGE_WIDTH --height $IMAGE_HEIGHT -n
     elif command -v fswebcam &>/dev/null; then
         fswebcam -d "$CAMERA_DEVICE" -r ${IMAGE_WIDTH}x${IMAGE_HEIGHT} --no-banner "$FILENAME"
     else
