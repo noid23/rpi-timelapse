@@ -70,6 +70,7 @@ Once the script finishes up you will find your timelapse movie in `$HOME/sunset-
 
 ## To-Do
 * Add command line flag to clean up images after video generation
+* Add output parameter to produce an MP4 video, animated GIF, or both
 * ~~Add logging capabilities~~
 
 ## Notes
